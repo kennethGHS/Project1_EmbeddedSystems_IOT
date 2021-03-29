@@ -11,44 +11,18 @@ class Server(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self):
-        print("GET")
         if self.path == "/":
-            file = open("index.html", mode='rb')
-            data = file.read()
-            file.close()
-            self.do_HEAD()
-            self.wfile.write(data)
+            self.send_file("website/index.html")
         elif self.path == "/api/sensors":
-            sensors = open("sensors.json", mode="rb")
-            data = sensors.read()
-            sensors.close()
-            self.do_HEAD()
-            self.wfile.write(data)
+            self.send_file("sensors.json")
         elif self.path == "/api/lights":
-            lights = open("lights.json", mode="rb")
-            data = lights.read()
-            lights.close()
-            self.do_HEAD()
-            self.wfile.write(data)
+            self.send_file("lights.json")
         elif self.path == "/api/take_picture":
-            take_picture = open("take_picture.json", mode="rb")
-            data = take_picture.read()
-            take_picture.close()
-            self.do_HEAD()
-            self.wfile.write(data)
+            self.send_file("take_picture.json")
         elif self.path == "/api/picture":
-            picture = open("picture.jpg", mode="rb")
-            data = picture.read()
-            picture.close()
-            self.do_HEAD()
-            self.wfile.write(data)
+            self.send_file("picture.jpg")
         else:
-            self.path = self.path[1:]
-            file = open(self.path, mode='rb')
-            data = file.read()
-            file.close()
-            self.do_HEAD()
-            self.wfile.write(data)
+            self.send_file("website" + self.path)
 
     def do_POST(self):
         # Get the size of data
@@ -57,23 +31,36 @@ class Server(BaseHTTPRequestHandler):
         post_data = self.rfile.read(content_length)
 
         if self.path == "/api/sensors":
-            sensors = open("sensors.json", mode="w")
-            sensors.write(post_data.decode("utf-8"))
-            sensors.close()
+            self.receive_file("sensors.json", post_data)
         elif self.path == "/api/lights":
-            lights = open("lights.json", mode="w")
-            lights.write(post_data.decode("utf-8"))
-            lights.close()
+            self.receive_file("lights.json", post_data)
         elif self.path == "/api/take_picture":
-            take_picture = open("take_picture.json", mode="w")
-            take_picture.write(post_data.decode("utf-8"))
-            take_picture.close()
+            self.receive_file("take_picture.json", post_data)
         elif self.path == "/api/picture":
-            picture = open("picture.jpg", mode="wb")
-            picture.write(post_data)
-            picture.close()
+            self.receive_file("picture.jpg", post_data)
+        else:
+            self.resource_not_found()
 
+    def send_file(self, path):
+        try:
+            file = open(path, mode='rb')
+            data = file.read()
+            file.close()
+            self.do_HEAD()
+            self.wfile.write(data)
+        except IOError:
+            self.resource_not_found()
+
+    def receive_file(self, path, data):
+        picture = open(path, mode="wb")
+        picture.write(data)
+        picture.close()
         self.do_HEAD()
+
+    def resource_not_found(self):
+        self.send_response(404)
+        self.send_header('Content-type', 'text/html')
+        self.end_headers()
 
 
 if __name__ == '__main__':
