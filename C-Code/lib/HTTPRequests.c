@@ -1,5 +1,5 @@
 #include "HTTPRequests.h"
-
+#include <pthread.h>
 int update_pins_server(){
 
     CURL *curl;
@@ -10,7 +10,7 @@ int update_pins_server(){
     curl = curl_easy_init();
     if(curl) {
 
-    curl_easy_setopt(curl, CURLOPT_URL, "https://example.com");
+    curl_easy_setopt(curl, CURLOPT_URL, "http://127.0.0.1:8000/api/sensors");
     curl_easy_setopt(curl, CURLOPT_POSTFIELDS, post_json);
 
     /* if we don't provide POSTFIELDSIZE, libcurl will strlen() by
@@ -31,19 +31,20 @@ int update_pins_server(){
 }
 static size_t cb(void *data, size_t size, size_t nmemb, void *userp)
  {
-   size_t realsize = size * nmemb;
-   struct memory *mem = (struct memory *)userp;
- 
-   char *ptr = realloc(mem->response, mem->size + realsize + 1);
-   if(ptr == NULL)
-     return 0;  /* out of memory! */
- 
-   mem->response = ptr;
-   memcpy(&(mem->response[mem->size]), data, realsize);
-   mem->size += realsize;
-   mem->response[mem->size] = 0;
- 
-   return realsize;
+    size_t realsize = size * nmemb;
+    struct memory *mem = (struct memory *)userp;
+    char *ptr =(char *) malloc(  realsize + 8);
+    if(ptr == NULL){
+        perror("ERROR");
+        return 0;  /* out of memory! */
+    }
+    mem->response = ptr;
+    // memcpy(&(mem->response[mem->size]), data, realsize);
+    strcpy(mem->response,data);
+    mem->size += realsize;
+    // mem->response[mem->size] = 0;
+    printf("%s \n",mem->response);
+    return realsize;
  }
 
 
@@ -51,24 +52,28 @@ int * get_update_lights(){
     struct memory chunk;
     CURL *curl;
     curl = curl_easy_init();
-    curl_easy_setopt(curl, CURLOPT_URL, "https://example.com");
+    curl_easy_setopt(curl, CURLOPT_URL, "http://127.0.0.1:8000/api/lights");
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, cb);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&chunk);
     curl_easy_perform(curl);
-    curl_easy_cleanup(curl);
-    json_object * json_root = json_tokener_parse(chunk.response);
-    int * pins = malloc(sizeof(int)*4);
+   json_object * json_root = json_tokener_parse(chunk.response);
+    int * pins = malloc(sizeof(int)*5);
     json_object * temp;
-    for(int i = 0;i++;i<4){
+    curl_easy_cleanup(curl);
+    perror("Error");
+    for(int i = 0;i<5;i++){
+        printf("%d\n",i);
         char pin[50];
-        snprintf(pin, 50, "pin%d", i);
+        perror("Error");
+        snprintf(pin, 50, "pin %d", i);
         int value_pin;
-        temp = json_object_object_get_ex(json_root,pin,&temp);
+        json_object_object_get_ex(json_root,pin,&temp);
         value_pin = json_object_get_int(temp);
         *(pins+i) = value_pin;
     }
     json_object_put(json_root);
-    curl_easy_cleanup(curl);
+    // curl_easy_cleanup(curl);
+    perror("Final");
     return pins;
 }
 
@@ -81,6 +86,11 @@ int upload_picture(){
     struct stat file_info;
     curl_off_t speed_upload, total_time;
     FILE *fd;
+    struct stat st = {0};
+
+    if (stat("../Image", &st) == -1) {
+      mkdir("../Image", 0777);
+    }
 
     fd = fopen("../Image/picture.jpeg", "rb"); /* open file to upload */ 
     if(!fd)
@@ -93,7 +103,7 @@ int upload_picture(){
     curl = curl_easy_init();
     if(curl) {
         curl_easy_setopt(curl, CURLOPT_URL,
-                            "file:///home/dast/src/curl/debug/new");
+                            "http://127.0.0.1:8000/api/picture");
 
         curl_easy_setopt(curl, CURLOPT_UPLOAD, 1L);
 
@@ -130,13 +140,14 @@ int upload_picture(){
     struct memory chunk;
     CURL *curl;
     curl = curl_easy_init();
-    curl_easy_setopt(curl, CURLOPT_URL, "https://example.com");
+    curl_easy_setopt(curl, CURLOPT_URL, "http://127.0.0.1:8000/");
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, cb);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&chunk);
     curl_easy_perform(curl);
     curl_easy_cleanup(curl);
     json_object * json_root = json_tokener_parse(chunk.response);
-    json_object * temp = json_object_object_get_ex(json_root,"",&temp);
+    json_object * temp ;
+    json_object_object_get_ex(json_root,"key",&temp);
     int value = json_object_get_int(temp);
     
     json_object_put(temp);

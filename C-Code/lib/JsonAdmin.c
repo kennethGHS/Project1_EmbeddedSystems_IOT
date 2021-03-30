@@ -35,6 +35,7 @@ int create_simple_file(){
         return -1;
     }
     else{
+        printf("Validating file \n");
         char * document = "{\
    \"pin 1\":\"0\",\
    \"pin 2\":\"0\",\
@@ -44,14 +45,20 @@ int create_simple_file(){
    \"pin 6\":\"0\",\
    \"pin 7\":\"0\",\
    \"pin 8\":\"0\"}";
-   file = fopen("../JsonFile/PinStates.json","r");
-   if(strlen(document) !=write(document,1,strlen(document),file) ){
+   file = fopen("../JsonFile/PinStates.json","w");
+   if(!file){
+       perror("Error with file");
+       return -1;
+   }
+   printf("Writting file\n");
+   if(strlen(document) !=fwrite(document,1,strlen(document),file) ){
        fclose(file);
        perror("Error while writting file");
        return -1;
    }
    else
    {
+        printf("Finished writting file \n");
        fclose(file);
    }
     }

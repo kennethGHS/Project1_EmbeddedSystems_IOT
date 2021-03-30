@@ -184,7 +184,7 @@ int capture_image(int fd, char * filename)
         return 1;
     }
     printf ("saving image\n");
-    FILE * file2 = fopen(file2,"wb");
+    FILE * file2 = fopen(filename,"wb");
     printf("%d",sizeoffile);
     fwrite(buffer,sizeoffile,1,file2);
     fclose(file2);
@@ -202,7 +202,7 @@ int capture_image(int fd, char * filename)
 int execute_image(char * filename){
     int fd;
 
-    fd = open("/dev/video0", O_RDWR);
+    fd = open("/dev/video1", O_RDWR);
     if (fd == -1)
     {
         perror("Opening video device");

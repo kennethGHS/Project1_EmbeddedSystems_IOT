@@ -5,7 +5,9 @@
 #include <curl/curl.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <string.h>
 #include "ImageGet.h"
+#include "JsonAdmin.h"
 sem_t * request_semaphore;
 int update_pins_server();
 int * get_update_lights();
