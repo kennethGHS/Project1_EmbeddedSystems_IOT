@@ -5,8 +5,14 @@
 #ifndef IMAGETEST_IOMANAGEMENT_H
 #define IMAGETEST_IOMANAGEMENT_H
 #include <pigpio.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+#include <malloc.h>
+#include <pthread.h>
 void * analyse_Gpio(void * gpioValue);
-void execute_change(short mode);
+void execute_change(int mode, int gpio);
 int * gpio_list;
 int list_len;
 short active;

@@ -16,5 +16,6 @@ static size_t cb(void *data, size_t size, size_t nmemb, void *userp);
    char *response;
    size_t size;
  };
+ void init_semaphore();
  int upload_picture();
  int get_image_take();

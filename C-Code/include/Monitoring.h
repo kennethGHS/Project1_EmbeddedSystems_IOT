@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <pthread.h>
+#include "JsonAdmin.h"
+#include "HTTPRequests.h"
 #ifndef IMAGETEST_MONITORING_H
 #define IMAGETEST_MONITORING_H
 //This semaphore is to prevent several pins to initialize at the same time
@@ -19,8 +21,16 @@ sem_t * unexport_semaphore;
 int * gpio_list;
 //The len of the lists
 int gpio_list_len;
+//The list of pins related to 
+int * light_list;
+//The len of the list
+int light_list_len;
 //Used to stop the thread cycle that reads the gpio
 int thread_executing;
+/**
+ * Makes an http request to update the pins
+ **/
+void * execute_light_monitoring();
 /**
  * Function called by thread to execute
  * @param gpio the gpio to be analyzed
@@ -33,7 +43,7 @@ void * execute_monitoring(void * gpio);
  * @param list  the list to be analyzed
  * @param list_len the len of the list
  */
-void initialize_values(int * list,int list_len);
+void initialize_values(int * list,int list_len, int * gpio_out_list, int gpio_out_list_len);
 /**
  * Unexports all the pins
  */
@@ -44,4 +54,9 @@ void destroy_monitoring();
  * @param value the actual value of the GPIO
  */
 void execute_on_change(int gpio, int value);
+/**
+ * Gets the position of a gpio number
+ **/
+int get_position_gpio(int gpio);
+
 #endif //IMAGETEST_MONITORING_H

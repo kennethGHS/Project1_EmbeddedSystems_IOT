@@ -8,7 +8,21 @@ void modify_entry( json_object * jobj, char * key,char * value){
     json_object * new_json_obj=  json_object_new_string(value_for_json);
     json_object_object_del(jobj,key);
     json_object_object_add(jobj,key_for_json,new_json_obj);
+    free(value_for_json);
+    free(key_for_json);
     return;
+}
+int modify_pin_state(int pin, int state){
+    json_object * pins = read_json();
+    char pin_str[10];
+    snprintf(pin_str,10,"%d",pin);
+    char pin_val[3];
+    snprintf(pin_val,3,"%d",state);
+    modify_entry(pins,pin_str,pin_val);
+    write_json(pins);
+    json_object_put(pins);
+    return 1;
+
 }
 json_object * read_json(){
     create_simple_file();

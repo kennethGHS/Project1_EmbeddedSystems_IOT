@@ -8,3 +8,4 @@ void write_json( json_object * jobj);
 int validate_files_dir();
 int create_simple_file();
 char * read_file_to_string();
+int modify_pin_state(int pin, int state);

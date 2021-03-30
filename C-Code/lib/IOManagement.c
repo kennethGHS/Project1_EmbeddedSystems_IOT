@@ -3,12 +3,6 @@
 //
 
 #include "IOManagement.h"
-#include <stdint.h>
-#include <stdio.h>
-#include <string.h>
-#include <unistd.h>
-#include <malloc.h>
-#include <pthread.h>
 
 void *analyse_Gpio(void *gpioValue) {
     gpioInitialise();
@@ -20,11 +14,11 @@ void *analyse_Gpio(void *gpioValue) {
         if (previous_state != actual_state) {
             if (actual_state == PI_HIGH) {
                 printf("Change to value %d in pin %d",1,gpio);
-                execute_change(1);
+                execute_change(1,gpio);
                 sleep(0.3);
             } else if (actual_state == PI_LOW) {
                 printf("Change to value %d in pin %d",0,gpio);
-                execute_change(0);
+                execute_change(0,gpio);
                 sleep(0.3);
 
             }
@@ -36,14 +30,8 @@ void *analyse_Gpio(void *gpioValue) {
 /**
  * This function is what happens when we detect a high or a low
  */
-void execute_change(short mode) {
-    if (mode) {
-        printf("Changes to another one 1");
-    } else {
-        printf("Changed again top 0");
-        //Execute something
-    }
-
+void execute_change(int mode, int gpio){
+    
 }
 
 void set_gpio_list_predefined(int *list) {
@@ -79,5 +67,4 @@ void execute_monitoring() {
     printf ("Press any to finish ");
     scanf ("%s", a_word);
     active = 0;
-
 }

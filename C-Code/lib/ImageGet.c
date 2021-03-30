@@ -202,7 +202,7 @@ int capture_image(int fd, char * filename)
 int execute_image(char * filename){
     int fd;
 
-    fd = open("/dev/video1", O_RDWR);
+    fd = open("/dev/video0", O_RDWR);
     if (fd == -1)
     {
         perror("Opening video device");

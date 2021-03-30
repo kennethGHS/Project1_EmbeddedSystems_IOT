@@ -57,7 +57,7 @@ void pinMode(int pin, short mode) {
     close(fd);
 }
 
-void digitalWrite(int pin, short value) {
+void digitalWrite(int pin, int value) {
     char pin_string[100];
     int fd;
     snprintf(pin_string, 100, "/sys/class/gpio/gpio%d/value", pin);

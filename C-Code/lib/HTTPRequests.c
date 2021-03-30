@@ -1,6 +1,7 @@
 #include "HTTPRequests.h"
 #include <pthread.h>
 int update_pins_server(){
+    sem_wait(request_semaphore);
 
     CURL *curl;
     CURLcode res;
@@ -27,10 +28,12 @@ int update_pins_server(){
     /* always cleanup */ 
     curl_easy_cleanup(curl);
     }
+    sem_post(request_semaphore);
     return 0;
 }
 static size_t cb(void *data, size_t size, size_t nmemb, void *userp)
  {
+    sem_wait(request_semaphore);
     size_t realsize = size * nmemb;
     struct memory *mem = (struct memory *)userp;
     char *ptr =(char *) malloc(  realsize + 8);
@@ -44,11 +47,13 @@ static size_t cb(void *data, size_t size, size_t nmemb, void *userp)
     mem->size += realsize;
     // mem->response[mem->size] = 0;
     printf("%s \n",mem->response);
+    sem_post(request_semaphore);
     return realsize;
  }
 
 
 int * get_update_lights(){
+    sem_wait(request_semaphore);
     struct memory chunk;
     CURL *curl;
     curl = curl_easy_init();
@@ -74,13 +79,14 @@ int * get_update_lights(){
     json_object_put(json_root);
     // curl_easy_cleanup(curl);
     perror("Final");
+    sem_post(request_semaphore);
     return pins;
 }
 
 
 
 int upload_picture(){
-
+    sem_wait(request_semaphore);
     CURL *curl;
     CURLcode res;
     struct stat file_info;
@@ -133,10 +139,12 @@ int upload_picture(){
         curl_easy_cleanup(curl);
     }
     fclose(fd);
+    sem_post(request_semaphore);
     return 0;
  }
 
  int get_image_take(){
+    sem_wait(request_semaphore);
     struct memory chunk;
     CURL *curl;
     curl = curl_easy_init();
@@ -158,6 +166,11 @@ int upload_picture(){
         curl_easy_cleanup(curl);
         upload_picture();
     }
-    
+    sem_post(request_semaphore);
     return 0;
+ }
+
+ void init_semaphore(){
+    request_semaphore = malloc(sizeof(sem_t));
+    sem_init(request_semaphore, 0, 1);
  }
