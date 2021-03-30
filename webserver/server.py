@@ -36,8 +36,17 @@ class Server(BaseHTTPRequestHandler):
             self.receive_file("lights.json", post_data)
         elif self.path == "/api/take_picture":
             self.receive_file("take_picture.json", post_data)
-        elif self.path == "/api/picture":
-            self.receive_file("picture.jpg", post_data)
+        else:
+            self.resource_not_found()
+
+    def do_PUT(self):
+        # Get the size of data
+        content_length = int(self.headers['Content-Length'])
+        # Get the data
+        put_data = self.rfile.read(content_length)
+
+        if self.path == "/api/picture":
+            self.receive_file("picture.jpg", put_data)
         else:
             self.resource_not_found()
 
