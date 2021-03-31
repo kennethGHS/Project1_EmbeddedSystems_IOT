@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<link rel="stylesheet" href="../css/lights.css">
+
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+<script src="https://unpkg.com/focus-visible@5.1.0/dist/focus-visible.js"></script>
+<script src="../js/lights.js"></script>
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lights</title>
+</head>
+<body>
+
+<model-viewer class="login_animation" src="../resources/house.glb" alt="A 3D model of an astronaut"
+              camera-controls rotation-per-second="500%">
+
+    <button id="button1" slot="hotspot-test" data-position="0.7m 2m -2.5m" onclick="light_up(this.id)"></button>
+
+</model-viewer>
+
+</body>
+</html>
