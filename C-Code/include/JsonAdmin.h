@@ -1,6 +1,9 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 #include <json-c/json.h>
 /** modifies a json entry of a given key with a given value
  * @param jobj the json object to be modified

@@ -9,6 +9,7 @@
 #include <pthread.h>
 #include "JsonAdmin.h"
 #include "HTTPRequests.h"
+
 #ifndef IMAGETEST_MONITORING_H
 #define IMAGETEST_MONITORING_H
 //This semaphore is to prevent several pins to initialize at the same time
