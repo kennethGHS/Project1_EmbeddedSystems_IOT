@@ -1,6 +1,8 @@
 #include "HTTPRequests.h"
 #include "ImageGet.h"
 int main(int argc, char const *argv[]) {
+
+    
     // get_update_lights();
     // struct stat st = {0};
 

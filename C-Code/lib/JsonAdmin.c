@@ -49,16 +49,17 @@ int create_simple_file(){
         return -1;
     }
     else{
+        mkdir("../JsonFile", 0777);
         printf("Validating file \n");
         char * document = "{\
-   \"pin 1\":\"0\",\
-   \"pin 2\":\"0\",\
-   \"pin 3\":\"0\",\
-   \"pin 4\":\"0\",\
-   \"pin 5\":\"0\",\
-   \"pin 6\":\"0\",\
-   \"pin 7\":\"0\",\
-   \"pin 8\":\"0\"}";
+                            \"pin 1\":\"0\",\
+                            \"pin 2\":\"0\",\
+                            \"pin 3\":\"0\",\
+                            \"pin 4\":\"0\",\
+                            \"pin 5\":\"0\",\
+                            \"pin 6\":\"0\",\
+                            \"pin 7\":\"0\",\
+                            \"pin 8\":\"0\"}";
    file = fopen("../JsonFile/PinStates.json","w");
    if(!file){
        perror("Error with file");

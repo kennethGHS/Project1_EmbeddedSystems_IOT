@@ -24,6 +24,7 @@ void *execute_monitoring(void *gpio) {
 
 void initialize_values(int *gpio_in_list, int gpio_in_list_len, int * gpio_out_list, int gpio_out_list_len) {
     thread_executing = 1;
+    init_semaphore();
     gpio_list = malloc(sizeof(int) * gpio_in_list_len);
     for (int i = 0; i < gpio_in_list_len; ++i) {
         gpio_list[i] = gpio_in_list[i];
@@ -70,6 +71,9 @@ void destroy_monitoring() {
     thread_executing = -1;
     for (int i = 0; i < gpio_list_len; ++i) {
         gpio_unexport(gpio_list[i]);
+    }
+    for(int i = 0; i < light_list_len;i++){
+        gpio_unexport(light_list[i]);
     }
 }
 int get_position_gpio(int gpio){
