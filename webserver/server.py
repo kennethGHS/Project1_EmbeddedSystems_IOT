@@ -1,3 +1,4 @@
+import mimetypes
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 host_port = 8000
@@ -7,7 +8,8 @@ class Server(BaseHTTPRequestHandler):
 
     def do_HEAD(self):
         self.send_response(200)
-        self.send_header('Content-type', 'text/html')
+        mimetype, _ = mimetypes.guess_type(self.path)
+        self.send_header('Content-type', mimetype)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Access-Control-Allow-Methods', 'GET, OPTIONS')
         self.send_header("Access-Control-Allow-Headers", "X-Requested-With")
