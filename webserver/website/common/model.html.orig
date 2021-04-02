@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<link rel="stylesheet" href="../css/model.css">
+
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+<script src="https://unpkg.com/focus-visible@5.1.0/dist/focus-visible.js"></script>
+<script type="text/javascript" src="../js/model.js"></script>
+<script type="text/javascript" src="../js/toc.js"></script>
+<script type="text/javascript" src="../js/login.js"></script>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lights</title>
+</head>
+<body>
+
+<model-viewer src="../resources/house.gltf" alt="A 3D model of a house" camera-controls>
+
+    <button id="living-room-light" slot="hotspot-living-room" data-position="0.75m 2m -2.5m"
+            onclick="switch_light_state(this.id)" ondblclick="switch_all_lights(this.id)"></button>
+    <button id="kitchen-light" slot="hotspot-kitchen" data-position="-4.5m 2m -1m"
+            onclick="switch_light_state(this.id)" ondblclick="switch_all_lights(this.id)"></button>
+    <button id="dinning-room-light" slot="hotspot-dinning-room" data-position="-4.5m 2m -4m"
+            onclick="switch_light_state(this.id)" ondblclick="switch_all_lights(this.id)"></button>
+    <button id="room1-light" slot="hotspot-room1" data-position="5.75m 2m -2.5m"
+            onclick="switch_light_state(this.id)" ondblclick="switch_all_lights(this.id)"></button>
+    <button id="room2-light" slot="hotspot-room2" data-position="-0.75m 2m 4.25m"
+            onclick="switch_light_state(this.id)" ondblclick="switch_all_lights(this.id)"></button>
+    <button id="bathroom-light" slot="hotspot-bathroom" data-position="-5.25m 2m 2.5m"
+            onclick="switch_light_state(this.id)" ondblclick="switch_all_lights(this.id)"></button>
+    <button id="backyard-light" slot="hotspot-backyard" data-position="5m 2m 4.25m"
+            onclick="switch_light_state(this.id)" ondblclick="switch_all_lights(this.id)"></button>
+
+</model-viewer>
+
+</body>
+</html>
