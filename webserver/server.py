@@ -1,3 +1,4 @@
+import mimetypes
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 host_port = 8000
@@ -7,7 +8,12 @@ class Server(BaseHTTPRequestHandler):
 
     def do_HEAD(self):
         self.send_response(200)
-        self.send_header('Content-type', 'text/html')
+        mimetype, _ = mimetypes.guess_type(self.path)
+        self.send_header('Content-type', mimetype)
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'GET, OPTIONS')
+        self.send_header("Access-Control-Allow-Headers", "X-Requested-With")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type")
         self.end_headers()
 
     def do_GET(self):
@@ -49,6 +55,11 @@ class Server(BaseHTTPRequestHandler):
             self.receive_file("picture.jpg", put_data)
         else:
             self.resource_not_found()
+
+    def do_OPTIONS(self):
+        self.send_response(200)
+        self.do_HEAD()
+        self.end_headers()
 
     def send_file(self, path):
         try:
