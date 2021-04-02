@@ -50,6 +50,14 @@ class Server(BaseHTTPRequestHandler):
         else:
             self.resource_not_found()
 
+    def do_OPTIONS(self):
+        self.send_response(200)
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'GET, OPTIONS')
+        self.send_header("Access-Control-Allow-Headers", "X-Requested-With")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.end_headers()
+
     def send_file(self, path):
         try:
             file = open(path, mode='rb')
