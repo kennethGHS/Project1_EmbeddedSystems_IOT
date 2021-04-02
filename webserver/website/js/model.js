@@ -18,7 +18,7 @@ const lights_url = "http://localhost:8000/api/lights";
 const lights_ON = "yellow";
 const lights_OFF = "black";
 
-function update_light_state() {
+function get_server_light_state() {
     const xhr = new XMLHttpRequest();
     xhr.responseType = 'text';
     xhr.open("GET", lights_url, true);
@@ -34,6 +34,26 @@ function update_light_state() {
     xhr.send(null);
 }
 
+function set_server_light_state() {
+    const xhr = new XMLHttpRequest();
+    xhr.responseType = 'json';
+    xhr.open("POST", lights_url, true);
+    const request = {}
+    for (const light_id in light_pins) {
+        const pin = light_pins[light_id];
+        request[pin] = light_states[light_id]
+    }
+    xhr.send(JSON.stringify(request));
+}
+
+function switch_light_state(light_id) {
+    if (light_id in light_states) {
+        light_states[light_id] = light_states[light_id] === "1" ? "0" : "1";
+        update_lights();
+        set_server_light_state();
+    }
+}
+
 function update_lights() {
     for (const light_id in light_states) {
         const light = document.getElementById(light_id);
@@ -47,6 +67,6 @@ function update_lights() {
 }
 
 document.addEventListener('DOMContentLoaded', (event) => {
-    update_light_state();
+    get_server_light_state();
 })
 
