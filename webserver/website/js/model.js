@@ -54,6 +54,18 @@ function switch_light_state(light_id) {
     }
 }
 
+function switch_all_lights(light_id) {
+    if (light_id in light_states) {
+        const state = light_states[light_id] === "1" ? "0" : "1";
+
+        for (const light_id in light_states) {
+            light_states[light_id] = state;
+        }
+        update_lights();
+        set_server_light_state();
+    }
+}
+
 function update_lights() {
     for (const light_id in light_states) {
         const light = document.getElementById(light_id);
