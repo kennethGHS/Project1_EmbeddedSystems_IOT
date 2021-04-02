@@ -15,23 +15,38 @@ const light_states = {
 }
 
 const lights_url = "http://localhost:8000/api/lights";
+const lights_ON = "yellow";
+const lights_OFF = "black";
 
-function light_state() {
-    console.log(JSON.stringify(light_states));
+function update_light_state() {
     const xhr = new XMLHttpRequest();
     xhr.responseType = 'text';
     xhr.open("GET", lights_url, true);
     xhr.onreadystatechange = function () {
         // Request finished. Do processing here.
         const response = JSON.parse(xhr.responseText)
-        for (const light in light_pins) {
-            const pin = light_pins[light];
-            light_states[light] = response[pin]
+        for (const light_id in light_pins) {
+            const pin = light_pins[light_id];
+            light_states[light_id] = response[pin]
         }
-        console.log(JSON.stringify(light_states));
-
+        update_lights();
     };
     xhr.send(null);
 }
 
-light_state();
+function update_lights() {
+    for (const light_id in light_states) {
+        const light = document.getElementById(light_id);
+        console.log(JSON.stringify(light_states));
+        if (light_states[light_id] === "1") {
+            light.style.backgroundColor = lights_ON;
+        } else {
+            light.style.backgroundColor = lights_OFF;
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    update_light_state();
+})
+
