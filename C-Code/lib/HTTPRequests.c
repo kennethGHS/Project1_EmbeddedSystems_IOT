@@ -33,7 +33,6 @@ int update_pins_server(){
 }
 static size_t cb(void *data, size_t size, size_t nmemb, void *userp)
  {
-    sem_wait(request_semaphore);
     size_t realsize = size * nmemb;
     struct memory *mem = (struct memory *)userp;
     char *ptr =(char *) malloc(  realsize + 8);
@@ -47,7 +46,6 @@ static size_t cb(void *data, size_t size, size_t nmemb, void *userp)
     mem->size += realsize;
     // mem->response[mem->size] = 0;
     printf("%s \n",mem->response);
-    sem_post(request_semaphore);
     return realsize;
  }
 
@@ -65,7 +63,6 @@ int * get_update_lights(){
     int * pins = malloc(sizeof(int)*5);
     json_object * temp;
     curl_easy_cleanup(curl);
-    perror("Error");
     for(int i = 0;i<5;i++){
         printf("%d\n",i);
         char pin[50];
@@ -78,7 +75,6 @@ int * get_update_lights(){
     }
     json_object_put(json_root);
     // curl_easy_cleanup(curl);
-    perror("Final");
     sem_post(request_semaphore);
     return pins;
 }
@@ -86,7 +82,7 @@ int * get_update_lights(){
 
 
 int upload_picture(){
-    sem_wait(request_semaphore);
+    printf("Uploading \n");
     CURL *curl;
     CURLcode res;
     struct stat file_info;
@@ -139,7 +135,6 @@ int upload_picture(){
         curl_easy_cleanup(curl);
     }
     fclose(fd);
-    sem_post(request_semaphore);
     return 0;
  }
 
@@ -148,22 +143,24 @@ int upload_picture(){
     struct memory chunk;
     CURL *curl;
     curl = curl_easy_init();
-    curl_easy_setopt(curl, CURLOPT_URL, "http://127.0.0.1:8000/");
+    curl_easy_setopt(curl, CURLOPT_URL, "http://127.0.0.1:8000/api/take_picture");
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, cb);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&chunk);
     curl_easy_perform(curl);
     curl_easy_cleanup(curl);
     json_object * json_root = json_tokener_parse(chunk.response);
     json_object * temp ;
-    json_object_object_get_ex(json_root,"key",&temp);
+    json_object_object_get_ex(json_root,"photo",&temp);
     int value = json_object_get_int(temp);
-    
-    json_object_put(temp);
+    struct stat st = {0};
+
+    if (stat("../Image", &st) == -1) {
+      mkdir("../Image", 0777);
+    }
     json_object_put(json_root);
     if (value == 1)
     {
         execute_image("../Image/picture.jpeg");
-        curl_easy_cleanup(curl);
         upload_picture();
     }
     sem_post(request_semaphore);

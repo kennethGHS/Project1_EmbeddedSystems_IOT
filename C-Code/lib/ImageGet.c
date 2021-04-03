@@ -185,9 +185,10 @@ int capture_image(int fd, char * filename)
     }
     printf ("saving image\n");
     FILE * file2 = fopen(filename,"wb");
-    printf("%d",sizeoffile);
+    printf("%d\n",sizeoffile);
     fwrite(buffer,sizeoffile,1,file2);
     fclose(file2);
+    printf("Segmentation not here \n");
 
 //    IplImage* frame;
 //    CvMat cvmat = cvMat(480, 640, CV_8UC3, (void*)buffer);
