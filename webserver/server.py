@@ -76,7 +76,6 @@ class Server(BaseHTTPRequestHandler):
             self.resource_not_found()
 
     def do_OPTIONS(self):
-        self.send_response(200)
         self.do_HEAD()
 
     def send_file(self, path):
