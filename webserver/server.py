@@ -38,6 +38,9 @@ class Server(BaseHTTPRequestHandler):
             self.send_file("lights.json")
         elif self.path == "/api/take_picture":
             self.send_file("take_picture.json")
+            file = open("take_picture.json", mode="w")
+            file.write('{"photo":"0"}')
+            file.close()
         elif self.path == "/api/picture":
             self.send_file("picture.jpg")
         else:
@@ -89,9 +92,9 @@ class Server(BaseHTTPRequestHandler):
             self.resource_not_found()
 
     def receive_file(self, path, data):
-        picture = open(path, mode="wb")
-        picture.write(data)
-        picture.close()
+        file = open(path, mode="wb")
+        file.write(data)
+        file.close()
         self.do_HEAD()
 
     def authenticate(self, path, data):
