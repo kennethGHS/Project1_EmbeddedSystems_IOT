@@ -51,6 +51,12 @@ void initialize_values(int *gpio_in_list, int gpio_in_list_len, int * gpio_out_l
     }
     pthread_t light_thread;
     pthread_create(&(light_thread), NULL, execute_light_monitoring,NULL);
+    while (thread_executing)
+    {
+        get_image_take();
+        sleep(1);
+    }
+    
 }
 
 void * execute_light_monitoring(){
