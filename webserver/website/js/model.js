@@ -14,7 +14,6 @@ const light_states = {
     "room2-light": "0"
 }
 
-const lights_url = "http://localhost:8000/api/lights";
 const lights_ON = "yellow";
 const lights_OFF = "black";
 
@@ -79,6 +78,7 @@ function update_lights() {
 }
 
 document.addEventListener('DOMContentLoaded', (event) => {
+    validate_session(model_url, login_url);
     get_server_light_state();
 })
 
