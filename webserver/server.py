@@ -39,7 +39,7 @@ class Server(BaseHTTPRequestHandler):
         elif self.path == "/api/take_picture":
             self.send_file("take_picture.json")
             file = open("take_picture.json", mode="w")
-            file.write('{"photo":"0"}')
+            file.write('{"photo": 0}')
             file.close()
         elif self.path == "/api/picture":
             self.send_file("picture.jpg")

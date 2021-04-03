@@ -1,24 +1,19 @@
 #include "JsonAdmin.h"
-void modify_entry( json_object * jobj, char * key,char * value){
+void modify_entry( json_object * jobj, char * key,int value){
     create_simple_file();
-    char * value_for_json = malloc(15);
-    strcpy(value_for_json,value);
     char * key_for_json = malloc(15);
     strcpy(key_for_json,key);
-    json_object * new_json_obj=  json_object_new_string(value_for_json);
+    json_object * new_json_obj=  json_object_new_int(value);
     json_object_object_del(jobj,key);
     json_object_object_add(jobj,key_for_json,new_json_obj);
-    free(value_for_json);
     free(key_for_json);
     return;
 }
 int modify_pin_state(int pin, int state){
     json_object * pins = read_json();
     char pin_str[10];
-    snprintf(pin_str,10,"%d",pin);
-    char pin_val[3];
-    snprintf(pin_val,3,"%d",state);
-    modify_entry(pins,pin_str,pin_val);
+    snprintf(pin_str,10,"pin %d",pin);
+    modify_entry(pins,pin_str,state);
     write_json(pins);
     json_object_put(pins);
     return 1;
@@ -30,6 +25,7 @@ json_object * read_json(){
 }
 void write_json( json_object * jobj){
     create_simple_file();
+    printf("%s \n Is the value \n",json_object_to_json_string(jobj));
     json_object_to_file("../JsonFile/PinStates.json",jobj);
 
 }
@@ -56,10 +52,7 @@ int create_simple_file(){
                             \"pin 2\":\"0\",\
                             \"pin 3\":\"0\",\
                             \"pin 4\":\"0\",\
-                            \"pin 5\":\"0\",\
-                            \"pin 6\":\"0\",\
-                            \"pin 7\":\"0\",\
-                            \"pin 8\":\"0\"}";
+                            }";
    file = fopen("../JsonFile/PinStates.json","w");
    if(!file){
        perror("Error with file");

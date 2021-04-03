@@ -10,7 +10,7 @@
  * @param key the key of the value to be modified
  * @param value value to be given to the key
  **/
-void modify_entry( json_object * jobj, char * key,char * value);
+void modify_entry( json_object * jobj, char * key,int value);
 /** Reads the json file containing the pin values
  * @return returns the jsonb object of the file
  **/
