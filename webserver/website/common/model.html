@@ -23,8 +23,8 @@
 <body>
 
 
-<model-viewer class="main-model" src="../resources/house.gltf" alt="A 3D model of a house" camera-controls
-              onclick="console.log('CLICK')">
+<model-viewer class="main-model" src="../resources/house.gltf" alt="A 3D model of a house"
+              camera-orbit="180deg 60deg 200m" camera-controls>
 
     <button id="living-room-light" class="light" slot="hotspot-living-room" data-position="0.75m 2m -2.5m"
             onclick="switch_light_state(this.id)" ondblclick="switch_all_lights(this.id)"></button>
@@ -36,16 +36,16 @@
             onclick="switch_light_state(this.id)" ondblclick="switch_all_lights(this.id)"></button>
     <button id="blue-room-light" class="light" slot="hotspot-room2" data-position="-0.75m 2m 4.25m"
             onclick="switch_light_state(this.id)" ondblclick="switch_all_lights(this.id)"></button>
-
+    <h2>Click a light to switch it on and off. Double click any light to affect all of them</h2>
 </model-viewer>
-
 
 <div class="rightcolumn">
     <div class="card" style="margin: 30px">
         <div class="card-header">
             <div class="door">
-                <model-viewer class="door" src="../resources/house.gltf" alt="A 3D model of a door"
-                              auto-rotate></model-viewer>
+                <model-viewer class="door" src="../resources/door.gltf" camera-orbit="-90deg 80deg 4m"
+                              interaction-prompt="none" auto-rotate auto-rotate-delay="0"
+                              rotation-per-second="45deg" camera-controls></model-viewer>
             </div>
             <h2 style="font-family: 'Ubuntu';">DOORS</h2>
 
@@ -76,8 +76,9 @@
     <div class="card" style="margin: 30px">
         <div class="card-header">
             <div class="door">
-                <model-viewer class="door" src="../resources/house.gltf" alt="A 3D model of a door"
-                              auto-rotate></model-viewer>
+                <model-viewer class="door" src="../resources/lamp.gltf"
+                              auto-rotate auto-rotate-delay="0" rotation-per-second="45deg"
+                              camera-controls interaction-prompt="none"></model-viewer>
             </div>
             <h2 style="font-family: 'Ubuntu';">LIGHTS</h2>
 
@@ -110,10 +111,11 @@
     </div>
 </div>
 
-<button type="button" class="btn btn-primary" id="picture-button" data-toggle="modal"
-        onclick="take_picture()">
-    Take Picture
-</button>
+<model-viewer id="picture-button" src="../resources/camera.gltf" interaction-prompt="none"
+              auto-rotate auto-rotate-delay="0"
+              rotation-per-second="45deg" camera-controls onclick="take_picture()">
+    <h5 style="position:absolute;bottom: 0%">Interact to show the garden camera</h5>
+</model-viewer>
 
 <div id="myModal" class="modal">
     <span class="close" onclick="hide_modal()">&times;</span>

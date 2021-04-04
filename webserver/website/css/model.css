@@ -37,9 +37,10 @@
 
 .main-model {
     position: absolute;
-    left: 25%;
+    left: 50%;
     top: 1%;
     width: 50%;
+    transform: translate(-50%);
     height: 800px;
 }
 
@@ -56,5 +57,8 @@ body {
 
 #picture-button {
     position: absolute;
-    bottom: 10%;
+    top: 700px;
+    left: 50%;
+    transform: translate(-50%);
+    height: 150px;
 }
