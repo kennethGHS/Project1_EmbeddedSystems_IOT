@@ -1,9 +1,9 @@
 const light_pins = {
-    "living-room-light": "pin 1",
-    "kitchen-light": "pin 2",
-    "dinning-room-light": "pin 3",
-    "red-room-light": "pin 4",
-    "blue-room-light": "pin 5"
+    "living-room-light": "pin 0",
+    "kitchen-light": "pin 1",
+    "dinning-room-light": "pin 2",
+    "red-room-light": "pin 3",
+    "blue-room-light": "pin 4"
 }
 
 const light_states = {}
@@ -63,7 +63,6 @@ function update_lights() {
     for (const light_id in light_states) {
         const light = document.getElementById(light_id);
         const light_label = document.getElementById(light_id + "-label");
-        console.log(JSON.stringify(light_states));
         if (light_states[light_id] === 1) {
             light.style.backgroundColor = lights_ON;
             light_label.style.color = lights_ON;
@@ -77,8 +76,52 @@ function update_lights() {
 }
 
 
+const sensor_pins = {
+    "front-door-sensor": "pin 0",
+    "back-door-sensor": "pin 1",
+    "red-room-door-sensor": "pin 2",
+    "blue-room-door-sensor": "pin 3"
+}
+
+const sensor_states = {}
+
+const sensor_ON = "forestgreen";
+const sensor_OFF = "red";
+
+function get_server_sensors_state() {
+    const xhr = new XMLHttpRequest();
+    xhr.responseType = 'text';
+    xhr.open("GET", sensors_url, true);
+    xhr.onreadystatechange = function () {
+        // Request finished. Do processing here.
+        const response = JSON.parse(xhr.responseText)
+        for (const sensor_id in sensor_pins) {
+            const pin = sensor_pins[sensor_id];
+            sensor_states[sensor_id] = response[pin]
+        }
+        update_sensors();
+    };
+    xhr.send(null);
+}
+
+function update_sensors() {
+    console.log(JSON.stringify(sensor_states))
+    for (const sensor_id in sensor_states) {
+        const sensor = document.getElementById(sensor_id);
+        if (sensor_states[sensor_id] === "1") {
+            sensor.style.color = sensor_ON;
+            sensor.textContent = "OPEN";
+        } else {
+            sensor.style.color = sensor_OFF;
+            sensor.textContent = "CLOSED";
+        }
+    }
+}
+
+
 document.addEventListener('DOMContentLoaded', (event) => {
     validate_session(model_url, login_url);
     get_server_light_state();
+    get_server_sensors_state();
 })
 
