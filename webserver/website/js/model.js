@@ -105,7 +105,6 @@ function get_server_sensors_state() {
 }
 
 function update_sensors() {
-    console.log(JSON.stringify(sensor_states))
     for (const sensor_id in sensor_states) {
         const sensor = document.getElementById(sensor_id);
         if (sensor_states[sensor_id] === "1") {
@@ -119,9 +118,30 @@ function update_sensors() {
 }
 
 
+function take_picture() {
+    const xhr = new XMLHttpRequest();
+    xhr.responseType = 'json';
+    xhr.open("POST", take_picture_url, true);
+    xhr.onreadystatechange = function () {
+        show_modal();
+    }
+    xhr.send(JSON.stringify({"photo": 1}));
+}
+
+function hide_modal() {
+    var modal = document.getElementById("myModal");
+    modal.style.display = "none";
+}
+
+function show_modal() {
+    var modal = document.getElementById("myModal");
+    var modalImg = document.getElementById("picture");
+    modal.style.display = "block";
+    modalImg.src = get_picture_url;
+}
+
 document.addEventListener('DOMContentLoaded', (event) => {
     validate_session(model_url, login_url);
     get_server_light_state();
     get_server_sensors_state();
 })
-

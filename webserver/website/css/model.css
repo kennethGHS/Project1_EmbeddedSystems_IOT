@@ -53,3 +53,8 @@ body {
     width: 100%;
     height: 150px;
 }
+
+#picture-button {
+    position: absolute;
+    bottom: 10%;
+}
