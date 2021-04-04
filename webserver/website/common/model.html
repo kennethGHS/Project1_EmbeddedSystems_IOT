@@ -29,13 +29,9 @@
             onclick="switch_light_state(this.id)" ondblclick="switch_all_lights(this.id)"></button>
     <button id="dinning-room-light" class="light" slot="hotspot-dinning-room" data-position="-4.5m 2m -4m"
             onclick="switch_light_state(this.id)" ondblclick="switch_all_lights(this.id)"></button>
-    <button id="room1-light" class="light" slot="hotspot-room1" data-position="5.75m 2m -2.5m"
+    <button id="red-room-light" class="light" slot="hotspot-room1" data-position="5.75m 2m -2.5m"
             onclick="switch_light_state(this.id)" ondblclick="switch_all_lights(this.id)"></button>
-    <button id="room2-light" class="light" slot="hotspot-room2" data-position="-0.75m 2m 4.25m"
-            onclick="switch_light_state(this.id)" ondblclick="switch_all_lights(this.id)"></button>
-    <button id="bathroom-light" class="light" slot="hotspot-bathroom" data-position="-5.25m 2m 2.5m"
-            onclick="switch_light_state(this.id)" ondblclick="switch_all_lights(this.id)"></button>
-    <button id="backyard-light" class="light" slot="hotspot-backyard" data-position="5m 2m 4.25m"
+    <button id="blue-room-light" class="light" slot="hotspot-room2" data-position="-0.75m 2m 4.25m"
             onclick="switch_light_state(this.id)" ondblclick="switch_all_lights(this.id)"></button>
 
 </model-viewer>
@@ -55,7 +51,7 @@
             <table class="table table-bordered">
                 <tr>
                     <td><h5>Front</h5></td>
-                    <td><h5 style="color: red">OPEN</h5></td>
+                    <td><h5>OPEN</h5></td>
                 </tr>
                 <tr>
                     <td><h5>Back</h5></td>
@@ -88,23 +84,23 @@
             <table class="table table-bordered">
                 <tr>
                     <td><h5>Kitchen</h5></td>
-                    <td><h5 style="color: red">OPEN</h5></td>
+                    <td><h5 id="kitchen-light-label">ON</h5></td>
                 </tr>
                 <tr>
                     <td><h5>Living Room</h5></td>
-                    <td><h5>OPEN</h5></td>
+                    <td><h5 id="living-room-light-label">ON</h5></td>
                 </tr>
                 <tr>
                     <td><h5>Dinning Room</h5></td>
-                    <td><h5>OPEN</h5></td>
+                    <td><h5 id="dinning-room-light-label">ON</h5></td>
                 </tr>
                 <tr>
                     <td><h5>Red Room</h5></td>
-                    <td><h5>CLOSED</h5></td>
+                    <td><h5 id="red-room-light-label">ON</h5></td>
                 </tr>
                 <tr>
                     <td><h5>Blue Room</h5></td>
-                    <td><h5>OPEN</h5></td>
+                    <td><h5 id="blue-room-light-label">ON</h5></td>
                 </tr>
             </table>
         </div>

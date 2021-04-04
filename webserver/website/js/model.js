@@ -2,19 +2,13 @@ const light_pins = {
     "living-room-light": "pin 1",
     "kitchen-light": "pin 2",
     "dinning-room-light": "pin 3",
-    "room1-light": "pin 4",
-    "room2-light": "pin 5"
+    "red-room-light": "pin 4",
+    "blue-room-light": "pin 5"
 }
 
-const light_states = {
-    "living-room-light": "0",
-    "kitchen-light": "0",
-    "dinning-room-light": "0",
-    "room1-light": "0",
-    "room2-light": "0"
-}
+const light_states = {}
 
-const lights_ON = "yellow";
+const lights_ON = "#F8F272";
 const lights_OFF = "black";
 
 function get_server_light_state() {
@@ -47,7 +41,7 @@ function set_server_light_state() {
 
 function switch_light_state(light_id) {
     if (light_id in light_states) {
-        light_states[light_id] = light_states[light_id] === "1" ? "0" : "1";
+        light_states[light_id] = light_states[light_id] === 1 ? 0 : 1;
         update_lights();
         set_server_light_state();
     }
@@ -55,7 +49,7 @@ function switch_light_state(light_id) {
 
 function switch_all_lights(light_id) {
     if (light_id in light_states) {
-        const state = light_states[light_id] === "1" ? "0" : "1";
+        const state = light_states[light_id] === 1 ? 0 : 1;
 
         for (const light_id in light_states) {
             light_states[light_id] = state;
@@ -68,14 +62,20 @@ function switch_all_lights(light_id) {
 function update_lights() {
     for (const light_id in light_states) {
         const light = document.getElementById(light_id);
+        const light_label = document.getElementById(light_id + "-label");
         console.log(JSON.stringify(light_states));
-        if (light_states[light_id] === "1") {
+        if (light_states[light_id] === 1) {
             light.style.backgroundColor = lights_ON;
+            light_label.style.color = lights_ON;
+            light_label.textContent = "ON";
         } else {
             light.style.backgroundColor = lights_OFF;
+            light_label.style.color = lights_OFF;
+            light_label.textContent = "OFF";
         }
     }
 }
+
 
 document.addEventListener('DOMContentLoaded', (event) => {
     validate_session(model_url, login_url);
