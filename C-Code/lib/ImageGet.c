@@ -12,7 +12,7 @@
 #include <sys/ioctl.h>
 #include <sys/mman.h>
 #include <unistd.h>
-
+#include "ImageGet.h"
 
 uint8_t *buffer;
 int sizeoffile;
@@ -201,20 +201,25 @@ int capture_image(int fd, char * filename)
     return 0;
 }
 int execute_image(char * filename){
-    int fd;
-
-    fd = open("/dev/video0", O_RDWR);
-    if (fd == -1)
+    if (first_execution == 0)
     {
-        perror("Opening video device");
-        return 1;
-    }
-    if(print_caps(fd))
-        return 1;
+        first_execution =1;
 
-    if(init_mmap(fd))
-        return 1;
-    int i;
-    capture_image(fd, filename);
-    close(fd);
+        file_webcam = open("/dev/video0", O_RDWR);
+        if (file_webcam == -1)
+        {
+            perror("Opening video device");
+            return 1;
+        }
+        if(print_caps(file_webcam))
+            return 1;
+
+        if(init_mmap(file_webcam))
+            return 1;
+        int i;
+    }
+    
+    
+    capture_image(file_webcam, filename);
+    printf("\n The device is freed");
 }

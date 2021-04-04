@@ -9,4 +9,7 @@ int print_caps(int fd);
 int init_mmap(int fd);
 int capture_image(int fd, char *string);
 int execute_image(char * filename);
+int first_execution;
+int file_webcam;
+
 #endif //IMAGETEST_IMAGEGET_H

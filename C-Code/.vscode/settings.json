@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "monitoring.h": "c"
+        "monitoring.h": "c",
+        "httprequests.h": "c"
     }
 }

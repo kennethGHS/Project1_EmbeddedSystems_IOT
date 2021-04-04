@@ -63,7 +63,7 @@ int * get_update_lights(){
     int * pins = malloc(sizeof(int)*5);
     json_object * temp;
     curl_easy_cleanup(curl);
-    for(int i = 0;i<5;i++){
+    for(int i = 1;i<6;i++){
         printf("%d\n",i);
         char pin[50];
         perror("Error");
