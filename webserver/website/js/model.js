@@ -143,5 +143,6 @@ function show_modal() {
 document.addEventListener('DOMContentLoaded', (event) => {
     validate_session(model_url, login_url);
     get_server_light_state();
+    get_server_sensors_state();
     setInterval(get_server_sensors_state, 5000);
 })
