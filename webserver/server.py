@@ -38,11 +38,8 @@ class Server(BaseHTTPRequestHandler):
             self.send_file("lights.json")
         elif self.path == "/api/take_picture":
             self.send_file("take_picture.json")
-            file = open("take_picture.json", mode="w")
-            file.write('{"photo": 0}')
-            file.close()
         elif self.path == "/api/picture":
-            self.send_file("picture.jpg")
+            self.send_file("picture.jpeg")
         else:
             self.send_file("website" + self.path)
 
@@ -74,7 +71,10 @@ class Server(BaseHTTPRequestHandler):
         put_data = self.rfile.read(content_length)
 
         if self.path == "/api/picture":
-            self.receive_file("picture.jpg", put_data)
+            self.receive_file("picture.jpeg", put_data)
+            file = open("take_picture.json", mode="w")
+            file.write('{"photo": 0}')
+            file.close()
         else:
             self.resource_not_found()
 
