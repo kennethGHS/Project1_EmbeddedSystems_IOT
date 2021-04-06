@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "monitoring.h": "c",
-        "httprequests.h": "c"
+        "httprequests.h": "c",
+        "imageget.h": "c"
     }
 }

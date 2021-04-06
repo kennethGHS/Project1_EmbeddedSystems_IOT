@@ -71,7 +71,7 @@ int * get_update_lights(){
         int value_pin;
         json_object_object_get_ex(json_root,pin,&temp);
         value_pin = json_object_get_int(temp);
-        *(pins+i) = value_pin;
+        *(pins+(i-1)) = value_pin;
     }
     json_object_put(json_root);
     // curl_easy_cleanup(curl);

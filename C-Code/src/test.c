@@ -1,7 +1,7 @@
-// #include "Monitoring.h"
+#include "Monitoring.h"
 // #include "HTTPRequests.h"
 // #include "JsonAdmin.h"
-#include "ImageGet.h"
+// #include "ImageGet.h"
 int main(int argc, char const *argv[]) {
 
     int gpio_in[] = {14,15,18,23};
