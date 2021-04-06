@@ -1,0 +1,442 @@
+{
+	"asset": {
+		"generator": "VISUALIZEGLTF",
+		"version" : "2.0"
+	},
+	"extensionsUsed": [ "KHR_lights_punctual" ],
+	"scenes": [
+		{
+			"name": "Default",
+			"nodes": [
+				0]
+		}
+	],
+	"nodes": [
+		{
+			"children": [
+				1, 6, 7, 8, 9, 10, 11
+			]
+			,"name": ""		}
+,
+		{
+			"children": [
+				2
+			]
+			,"matrix": [
+				1,					0,					0,					0,
+				0,					1,					0,					0,
+				0,					0,					1,					0,
+				0.04297929,					0.2580507,					-0.2391634,					1
+			]
+			,"name": "ceiling lamp"		}
+,
+		{
+			"children": [
+				3, 4
+			]
+			,"name": "Root"		}
+,
+		{
+			"mesh": 0
+			,"name": "black low gloss plastic"		}
+,
+		{
+			"children": [
+				5
+			]
+			,"mesh": 2
+			,"name": "glass sandblasted 01"		}
+,
+		{
+			"mesh": 1
+			,"name": "glass sandblasted 01_clonedChild"		}
+,
+		{
+			"matrix": [
+				0.8755611,					-5.215405E-08,					0.4831075,					0,
+				0.1130883,					0.9722161,					-0.2049558,					0,
+				-0.4696849,					0.2340852,					0.8512346,					0,
+				-3.004236,					2.049124,					5.55963,					1
+			]
+			,"camera": 0
+			,"name": "Default Camera"		}
+,
+		{
+			"matrix": [
+				0.2127228,					-0.1144821,					0.9703828,					0,
+				0.2140229,					0.9744557,					0.06804551,					0,
+				-0.9533851,					0.1932093,					0.2317908,					0,
+				-4.620539,					1.374297,					1.352078,					1
+			]
+			,"camera": 1
+			,"name": "SOLIDWORKS Viewport"		}
+,
+		{
+			"matrix": [
+				1,					0,					0,					0,
+				0,					0.06279051,					-0.9980267,					0,
+				0,					0.9980267,					0.06279051,					0,
+				0,					9.980268,					0.6279052,					1
+			]
+			,"extensions" : {
+				"KHR_lights_punctual" : {
+					"light" : 0
+				}
+			}
+			,"name": "Directional1"		}
+,
+		{
+			"matrix": [
+				0.9911693,					0,					-0.1326023,					0,
+				-0.06378024,					0.8767266,					-0.4767414,					0,
+				0.116256,					0.4809889,					0.8689846,					0,
+				1.162561,					4.809888,					8.689847,					1
+			]
+			,"extensions" : {
+				"KHR_lights_punctual" : {
+					"light" : 1
+				}
+			}
+			,"name": "Directional2"		}
+,
+		{
+			"name": "High Contrast Ramp"		}
+,
+		{
+			"name": "Studio Soft Grey 12"		}
+	],
+	"cameras": [
+		{
+			"type": "perspective",
+			"perspective" : {
+				"aspectRatio": 1.777778,
+				"yfov" : 0.2617994,
+				"zfar" : 100,
+				"znear" : 0.01
+			}
+		}
+,
+		{
+			"type": "perspective",
+			"perspective" : {
+				"aspectRatio": 1.25,
+				"yfov" : 0.3215369,
+				"zfar" : 100,
+				"znear" : 0.01
+			}
+		}
+	],
+	"extensions": {
+		"KHR_lights_punctual" : {
+			"lights": [
+		{
+			"name": "Directional1[1]",
+			"color": [
+					0.5773503, 0.5773503, 0.5773503
+				],
+			"intensity": 0.5773503,
+			"type": "directional"
+		}
+,
+		{
+			"name": "Directional2[1]",
+			"color": [
+					0.5773503, 0.5773503, 0.5773503
+				],
+			"intensity": 0.5773503,
+			"type": "directional"
+		}
+
+			]
+		}
+	},
+	"meshes" : [
+		{
+			"primitives" : [
+				{
+					"attributes" : {
+					"POSITION" : 1
+					,"NORMAL" : 2
+					,"TEXCOORD_0" : 3
+					},
+					"indices" : 0,
+					"mode": 4,
+					"material" : 0
+				}
+			]
+		},
+		{
+			"primitives" : [
+				{
+					"attributes" : {
+					"POSITION" : 5
+					,"NORMAL" : 6
+					,"TEXCOORD_0" : 7
+					},
+					"indices" : 4,
+					"mode": 4,
+					"material" : 1
+				}
+			]
+		},
+		{
+			"primitives" : [
+				{
+					"attributes" : {
+					"POSITION" : 9
+					,"NORMAL" : 10
+					,"TEXCOORD_0" : 11
+					},
+					"indices" : 8,
+					"mode": 4,
+					"material" : 1
+				}
+			]
+		}
+	],
+	"accessors" : [
+			{
+				"bufferView": 3
+				,"byteOffset" : 0
+				,"componentType" : 5125
+				,"count" : 86706
+				,"type" : "SCALAR"
+			},
+			{
+				"bufferView": 0
+				,"byteOffset" : 0
+				,"componentType" : 5126
+				,"count" : 32710
+				,"type" : "VEC3"
+								,"min": [-0.346034169,-0.25775075,-0.103773795]
+								,"max": [0.260075569,0.634902418,0.58210057]
+			},
+			{
+				"bufferView": 1
+				,"byteOffset" : 0
+				,"componentType" : 5126
+				,"count" : 32710
+				,"type" : "VEC3"
+			},
+			{
+				"bufferView": 2
+				,"byteOffset" : 0
+				,"componentType" : 5126
+				,"count" : 32710
+				,"type" : "VEC2"
+			},
+			{
+				"bufferView": 7
+				,"byteOffset" : 0
+				,"componentType" : 5125
+				,"count" : 36270
+				,"type" : "SCALAR"
+			},
+			{
+				"bufferView": 4
+				,"byteOffset" : 0
+				,"componentType" : 5126
+				,"count" : 19218
+				,"type" : "VEC3"
+								,"min": [-0.390624762,-0.0686984733,-0.148363516]
+								,"max": [0.304666191,0.0817479044,0.626690269]
+			},
+			{
+				"bufferView": 5
+				,"byteOffset" : 0
+				,"componentType" : 5126
+				,"count" : 19218
+				,"type" : "VEC3"
+			},
+			{
+				"bufferView": 6
+				,"byteOffset" : 0
+				,"componentType" : 5126
+				,"count" : 19218
+				,"type" : "VEC2"
+			},
+			{
+				"bufferView": 11
+				,"byteOffset" : 0
+				,"componentType" : 5125
+				,"count" : 36270
+				,"type" : "SCALAR"
+			},
+			{
+				"bufferView": 8
+				,"byteOffset" : 0
+				,"componentType" : 5126
+				,"count" : 19218
+				,"type" : "VEC3"
+								,"min": [-0.390624762,-0.0686984733,-0.148363516]
+								,"max": [0.304666191,0.0817479044,0.626690269]
+			},
+			{
+				"bufferView": 9
+				,"byteOffset" : 0
+				,"componentType" : 5126
+				,"count" : 19218
+				,"type" : "VEC3"
+			},
+			{
+				"bufferView": 10
+				,"byteOffset" : 0
+				,"componentType" : 5126
+				,"count" : 19218
+				,"type" : "VEC2"
+			}
+	],
+	"materials": [
+			{
+				"name": "black low gloss plastic",
+				"emissiveFactor": [
+					0, 0, 0
+				]
+				,"pbrMetallicRoughness": {
+					"baseColorFactor": [
+						0.006604289, 0.006604289, 0.006604289, 1
+					]
+					,"metallicFactor": 0
+					,"roughnessFactor": 0.02675766
+				}
+				,"alphaMode": "OPAQUE"
+				,"doubleSided": true
+			},
+			{
+				"name": "glass sandblasted 01",
+				"emissiveFactor": [
+					0, 0, 0
+				]
+				,"pbrMetallicRoughness": {
+					"baseColorTexture": {
+						"index": 0
+					}
+					,"baseColorFactor": [
+						0.1939819, 0.2080733, 0.2080733, 0.5101103
+					]
+					,"metallicFactor": 1
+					,"roughnessFactor": 0.3788893
+				}
+				,"alphaMode": "BLEND"
+				,"doubleSided": false
+			}
+	],
+	"textures": [
+			{
+				"sampler": 0,
+				"source": 0,
+				"name": "lamp_Texture_0001.png"
+			}
+	],
+	"images": [
+			{
+				"uri": "lamp_Texture_0001.png"
+			}
+	],
+	"samplers": [
+			{
+				"magFilter": 9729,
+				"minFilter" : 9729,
+				"wrapS" : 10497,
+				"wrapT" : 10497,
+				"name": "DefaultSampler"
+			}
+	],
+	"bufferViews" : [
+			{
+				"buffer": 0
+				,"byteOffset" : 0
+				,"byteLength" : 392520
+				,"byteStride" : 12
+				,"target" : 34962
+			},
+			{
+				"buffer": 0
+				,"byteOffset" : 392520
+				,"byteLength" : 392520
+				,"byteStride" : 12
+				,"target" : 34962
+			},
+			{
+				"buffer": 0
+				,"byteOffset" : 785040
+				,"byteLength" : 261680
+				,"byteStride" : 8
+				,"target" : 34962
+			},
+			{
+				"buffer": 0
+				,"byteOffset" : 1046720
+				,"byteLength" : 346824
+				,"target" : 34963
+			},
+			{
+				"buffer": 1
+				,"byteOffset" : 0
+				,"byteLength" : 230616
+				,"byteStride" : 12
+				,"target" : 34962
+			},
+			{
+				"buffer": 1
+				,"byteOffset" : 230616
+				,"byteLength" : 230616
+				,"byteStride" : 12
+				,"target" : 34962
+			},
+			{
+				"buffer": 1
+				,"byteOffset" : 461232
+				,"byteLength" : 153744
+				,"byteStride" : 8
+				,"target" : 34962
+			},
+			{
+				"buffer": 1
+				,"byteOffset" : 614976
+				,"byteLength" : 145080
+				,"target" : 34963
+			},
+			{
+				"buffer": 2
+				,"byteOffset" : 0
+				,"byteLength" : 230616
+				,"byteStride" : 12
+				,"target" : 34962
+			},
+			{
+				"buffer": 2
+				,"byteOffset" : 230616
+				,"byteLength" : 230616
+				,"byteStride" : 12
+				,"target" : 34962
+			},
+			{
+				"buffer": 2
+				,"byteOffset" : 461232
+				,"byteLength" : 153744
+				,"byteStride" : 8
+				,"target" : 34962
+			},
+			{
+				"buffer": 2
+				,"byteOffset" : 614976
+				,"byteLength" : 145080
+				,"target" : 34963
+			}
+	],
+	"buffers" : [
+			{
+				"byteLength": 1393544
+				,"uri" : "lamp_0001.bin"
+			},
+			{
+				"byteLength": 760056
+				,"uri" : "lamp_0002.bin"
+			},
+			{
+				"byteLength": 760056
+				,"uri" : "lamp_0003.bin"
+			}
+	]
+}
