@@ -52,11 +52,10 @@ function validate_session(next_url, default_url) {
         const response = JSON.parse(xhr.responseText)
 
         if (response["token"] === "valid") {
-            if (window.location.href !== next_url) {
+            if (window.location.pathname !== next_url) {
                 window.location = next_url;
             }
-        } else if (window.location.href !== default_url) {
-
+        } else if (window.location.pathname !== default_url) {
             window.location = default_url;
         }
 
