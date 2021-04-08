@@ -127,7 +127,6 @@ function take_picture() {
         var picture_timer = setInterval(show_picture, 2000);
         setTimeout(() => {
             clearInterval(picture_timer);
-            alert('No server response');
         }, 10000);
 
         function show_picture() {
