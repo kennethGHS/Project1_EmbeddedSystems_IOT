@@ -41,7 +41,7 @@ int validate_files_dir(){
 int create_simple_file(){
     FILE * file;
     if(validate_files_dir()){
-        perror("Files already exist");
+        printf("Dir exists \n");
         return -1;
     }
     else{
