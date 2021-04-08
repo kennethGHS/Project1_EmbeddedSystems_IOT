@@ -25,6 +25,12 @@ void *execute_monitoring(void *gpio) {
 void initialize_values(int *gpio_in_list, int gpio_in_list_len, int * gpio_out_list, int gpio_out_list_len) {
     thread_executing = 1;
     init_semaphore();
+    while (update_pins_server()==-1)
+    {
+        printf("Error, no server detected, connecting again in 3s \n");
+        sleep(3);
+        printf("trying again \n");
+    }
     gpio_list = malloc(sizeof(int) * gpio_in_list_len);
     for (int i = 0; i < gpio_in_list_len; ++i) {
         gpio_list[i] = gpio_in_list[i];
