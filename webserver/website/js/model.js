@@ -88,6 +88,7 @@ const sensor_states = {}
 const sensor_ON = "forestgreen";
 const sensor_OFF = "red";
 
+
 function get_server_sensors_state() {
     const xhr = new XMLHttpRequest();
     xhr.responseType = 'text';
@@ -123,10 +124,30 @@ function take_picture() {
     xhr.responseType = 'json';
     xhr.open("POST", take_picture_url, true);
     xhr.onreadystatechange = function () {
-        show_modal();
+        var picture_timer = setInterval(show_picture, 2000);
+        setTimeout(() => {
+            clearInterval(picture_timer);
+            alert('No server response');
+        }, 10000);
+
+        function show_picture() {
+            const xhr = new XMLHttpRequest();
+            xhr.responseType = 'text';
+            xhr.open("GET", take_picture_url, true);
+            xhr.onreadystatechange = function () {
+                // Request finished. Do processing here.
+                const response = JSON.parse(xhr.responseText)
+                if (response["photo"] === 0) {
+                    clearInterval(picture_timer);
+                    show_modal();
+                }
+            }
+            xhr.send(null);
+        }
     }
     xhr.send(JSON.stringify({"photo": 1}));
 }
+
 
 function hide_modal() {
     var modal = document.getElementById("myModal");
