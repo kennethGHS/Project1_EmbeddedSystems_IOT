@@ -31,7 +31,7 @@ class Server(BaseHTTPRequestHandler):
 
     def do_GET(self):
         if self.path == "/":
-            self.send_file("website/index.html")
+            self.send_file("website/common/login.html")
         elif self.path == "/api/sensors":
             self.send_file("sensors.json")
         elif self.path == "/api/lights":
