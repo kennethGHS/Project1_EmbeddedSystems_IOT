@@ -74,6 +74,7 @@ void * execute_light_monitoring(){
             digitalWrite(light_list[i],gpio_states[i]);
             sem_post(action_semaphore);
         }
+        free(gpio_states);
         sleep(1);
     }
     

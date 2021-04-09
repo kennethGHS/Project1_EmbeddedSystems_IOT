@@ -22,6 +22,7 @@ int update_pins_server(){
     res = curl_easy_perform(curl);
     /* Check for errors */ 
     if(res != CURLE_OK){
+        free(post_json);
         fprintf(stderr, "curl_easy_perform() failed: %s\n",
                 curl_easy_strerror(res));
 
@@ -31,6 +32,7 @@ int update_pins_server(){
     return -1;
     }
     }
+    free(post_json);
     curl_easy_cleanup(curl);
     sem_post(request_semaphore);
     return 0;
