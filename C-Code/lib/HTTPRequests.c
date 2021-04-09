@@ -13,23 +13,16 @@ int update_pins_server(){
 
     curl_easy_setopt(curl, CURLOPT_URL, "http://127.0.0.1:8000/api/sensors");
     curl_easy_setopt(curl, CURLOPT_POSTFIELDS, post_json);
-
-    /* if we don't provide POSTFIELDSIZE, libcurl will strlen() by
-        itself */ 
     curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, (long)strlen(post_json));
 
-    /* Perform the request, res will get the return code */ 
     res = curl_easy_perform(curl);
-    /* Check for errors */ 
     if(res != CURLE_OK){
         free(post_json);
         fprintf(stderr, "curl_easy_perform() failed: %s\n",
-                curl_easy_strerror(res));
-
-    /* always cleanup */ 
-    curl_easy_cleanup(curl);
-    sem_post(request_semaphore);
-    return -1;
+        curl_easy_strerror(res));
+        curl_easy_cleanup(curl);
+        sem_post(request_semaphore);
+        return -1;
     }
     }
     free(post_json);
@@ -47,10 +40,8 @@ static size_t cb(void *data, size_t size, size_t nmemb, void *userp)
         return 0;  /* out of memory! */
     }
     mem->response = ptr;
-    // memcpy(&(mem->response[mem->size]), data, realsize);
     strcpy(mem->response,data);
     mem->size += realsize;
-    // mem->response[mem->size] = 0;
     printf("%s \n",mem->response);
     return realsize;
  }
@@ -80,7 +71,6 @@ int * get_update_lights(){
         *(pins+(i-1)) = value_pin;
     }
     json_object_put(json_root);
-    // curl_easy_cleanup(curl);
     sem_post(request_semaphore);
     return pins;
 }

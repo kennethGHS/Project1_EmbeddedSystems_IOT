@@ -82,19 +82,10 @@ int print_caps(int fd)
         printf("  %s: %c%c %s\n", fourcc, c, e, fmtdesc.description);
         fmtdesc.index++;
     }
-    /*
-    if (!support_grbg10)
-    {
-        printf("Doesn't support GRBG10.\n");
-        return 1;
-    }*/
-
     struct v4l2_format fmt = {0};
     fmt.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
     fmt.fmt.pix.width = 1980;
     fmt.fmt.pix.height = 1080;
-    //fmt.fmt.pix.pixelformat = V4L2_PIX_FMT_BGR24;
-    //fmt.fmt.pix.pixelformat = V4L2_PIX_FMT_GREY;
     fmt.fmt.pix.pixelformat = V4L2_PIX_FMT_MJPEG;
     fmt.fmt.pix.field = V4L2_FIELD_NONE;
 
@@ -185,17 +176,10 @@ int capture_image(int fd, char * filename)
     }
     printf ("saving image\n");
     FILE * file2 = fopen(filename,"wb");
-    printf("%d\n",sizeoffile);
+    printf("Imagge size: %d\n",sizeoffile);
     fwrite(buffer,sizeoffile,1,file2);
     fclose(file2);
     printf("Image saved \n");
-//    IplImage* frame;
-//    CvMat cvmat = cvMat(480, 640, CV_8UC3, (void*)buffer);
-//    frame = cvDecodeImage(&cvmat, 1);
-//    cvNamedWindow("window",CV_WINDOW_AUTOSIZE);
-//    cvShowImage("window", frame);
-//    cvWaitKey(0);
-//    cvSaveImage("image.jpg", frame, 0);
 
     return 0;
 }

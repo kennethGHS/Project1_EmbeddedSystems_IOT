@@ -25,7 +25,7 @@ json_object * read_json(){
 }
 void write_json( json_object * jobj){
     create_simple_file();
-    printf("%s \n Is the value \n",json_object_to_json_string(jobj));
+    printf("\n Pin states are \n%s \n",json_object_to_json_string(jobj));
     json_object_to_file("../JsonFile/PinStates.json",jobj);
 
 }
@@ -48,6 +48,7 @@ int create_simple_file(){
         mkdir("../JsonFile", 0777);
         printf("Validating file \n");
         char * document = "{\
+                            \"pin 0\":\"0\",\
                             \"pin 1\":\"0\",\
                             \"pin 2\":\"0\",\
                             \"pin 3\":\"0\",\
@@ -76,7 +77,7 @@ int create_simple_file(){
 char * read_file_to_string(){
     create_simple_file();
     json_object * object = json_object_from_file("../JsonFile/PinStates.json");
-    char * string = malloc(strlen(json_object_to_json_string(object)));
+    char * string = malloc(strlen(json_object_to_json_string(object))+1);
     strcpy(string,json_object_to_json_string(object));
     json_object_put(object);
     return string;
