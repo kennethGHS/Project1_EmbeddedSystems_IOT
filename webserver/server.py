@@ -30,6 +30,7 @@ class Server(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self):
+        path = self.path.split("?")[0]
         if self.path == "/":
             self.send_file("website/common/login.html")
         elif self.path == "/api/sensors":
@@ -38,7 +39,7 @@ class Server(BaseHTTPRequestHandler):
             self.send_file("lights.json")
         elif self.path == "/api/take_picture":
             self.send_file("take_picture.json")
-        elif self.path == "/api/picture":
+        elif path == "/api/picture":
             self.send_file("picture.jpeg")
         else:
             self.send_file("website" + self.path)
@@ -129,7 +130,8 @@ class Server(BaseHTTPRequestHandler):
             if token == data["token"]:
                 value = "valid"
                 break
-        self.do_HEAD()
+        self.do_ = get_picture_url;
+        HEAD()
         self.wfile.write(json.dumps({"token": value}).encode())
         file.close()
 
