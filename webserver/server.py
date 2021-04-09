@@ -130,8 +130,7 @@ class Server(BaseHTTPRequestHandler):
             if token == data["token"]:
                 value = "valid"
                 break
-        self.do_ = get_picture_url;
-        HEAD()
+        self.do_HEAD()
         self.wfile.write(json.dumps({"token": value}).encode())
         file.close()
 
