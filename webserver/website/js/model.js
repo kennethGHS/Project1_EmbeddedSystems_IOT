@@ -109,7 +109,7 @@ function get_server_sensors_state() {
 function update_sensors() {
     for (const sensor_id in sensor_states) {
         const sensor = document.getElementById(sensor_id);
-        if (sensor_states[sensor_id] === "1") {
+        if (sensor_states[sensor_id] === 1) {
             sensor.style.color = sensor_ON;
             sensor.textContent = "OPEN";
         } else {
