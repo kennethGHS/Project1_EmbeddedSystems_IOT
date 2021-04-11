@@ -60,15 +60,13 @@ int * get_update_lights(){
     int * pins = malloc(sizeof(int)*5);
     json_object * temp;
     curl_easy_cleanup(curl);
-    for(int i = 1;i<6;i++){
-        printf("%d\n",i);
+    for(int i = 0;i<5;i++){
         char pin[50];
-        perror("Error");
         snprintf(pin, 50, "pin %d", i);
         int value_pin;
         json_object_object_get_ex(json_root,pin,&temp);
         value_pin = json_object_get_int(temp);
-        *(pins+(i-1)) = value_pin;
+        *(pins+i) = value_pin;
     }
     json_object_put(json_root);
     sem_post(request_semaphore);
@@ -90,13 +88,13 @@ int upload_picture(){
       mkdir("../Image", 0777);
     }
 
-    fd = fopen("../Image/picture.jpeg", "rb"); /* open file to upload */ 
+    fd = fopen("../Image/picture.jpeg", "rb"); /* open file to upload */
     if(!fd)
-        return 1; /* can't continue */ 
+        return 1; /* can't continue */
 
 
     if(fstat(fileno(fd), &file_info) != 0)
-        return 1; 
+        return 1;
 
     curl = curl_easy_init();
     if(curl) {
