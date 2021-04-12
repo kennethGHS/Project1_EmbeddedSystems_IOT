@@ -19,8 +19,12 @@ json_object * read_json();
  *  @param jobj the object to be written
  **/
 void write_json( json_object * jobj);
-
+/** Validates that the directory exists **/
 int validate_files_dir();
+/** creates the simple JSON file of the pin states **/
 int create_simple_file();
+/** Reads the Json file to a string **/
 char * read_file_to_string();
+/** Modifies the json file and saves it, rewritting the
+ * previous file **/
 int modify_pin_state(int pin, int state);
